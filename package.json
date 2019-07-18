@@ -1,0 +1,30 @@
+{
+    "name": "vue-router-auto",
+    "version": "1.0.0",
+    "description": "auto create vue-router",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "babel": "babel src --out-dir lib"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MrHzq/babel-something.git"
+    },
+    "keywords": [
+        "vue-router",
+        "auto-create-vue-router"
+    ],
+    "author": "hzq",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/MrHzq/babel-something/issues"
+    },
+    "homepage": "https://github.com/MrHzq/babel-something#readme",
+    "devDependencies": {
+        "babel-plugin-dynamic-import-webpack": "^1.1.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-2": "^6.24.1"
+    }
+}
