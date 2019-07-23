@@ -1,6 +1,6 @@
 {
     "name": "vue-router-auto",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "auto create vue-router",
     "main": "index.js",
     "scripts": {
