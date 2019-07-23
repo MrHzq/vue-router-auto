@@ -4,6 +4,8 @@
 
 [npm 包](https://www.npmjs.com/package/vue-router-auto)
 
+### [专门写的案例](https://mrhzq.github.io/vue-router-auto-example/example/index.html#/)
+
 > 功能：将项目文件自动转为相应的路由配置 和`Nuxt`的路由一样，可实现的功能可以参考[这里](https://zh.nuxtjs.org/guide/routing)
 
 ## vue 路由自动生成插件
