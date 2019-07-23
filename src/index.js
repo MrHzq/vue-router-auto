@@ -2,10 +2,8 @@
  * @Author: hzq
  * @Date: 2018-12-12 10:10:19
  * @Last Modified by: hzq
- * @Last Modified time: 2019-07-18 20:06:10
- * @文件说明: 所有路由处理
- * key：为views下面的【文件夹】名称
- * []：为对应key下面的【.vue文件】名称
+ * @Last Modified time: 2019-07-23 09:01:32
+ * @文件说明: 所有路由处理 - 源码
  */
 
 // 所生成的所有路由数组
@@ -50,7 +48,8 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
             fileName: r.fileName,
             // path：只是以name命名的path，还不是真正的路由path
             path: '/' + (name === 'index' ? '' : name),
-            needDelectName: name === 'index',
+            // needDelectName: name === 'index',
+            needDelectName: false,
             component: () => import(`@/${rootFile}${r.routerComponent}`)
         }
         maxLen = r.fileLen
@@ -77,8 +76,19 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
         const curr = newcurr || allRouters['len' + index]
         // 当前深度上一层的路由数据
         const pre = allRouters['len' + (index - 1)]
-        // 若 没有上一层的数据了，则结束方法
-        if (!pre) return
+        // 若 没有上一层的数据了
+        if (!pre) {
+            // 则表明是属于顶层的路由
+            curr.map(c => {
+                let path = '/' + c.fileName.replace('/index', '')
+                if (path.match('_')) path = path.replace('/_', '/:')
+                // 将真正的路由path赋值给当前路由
+                c.path = path
+                // 将当前路由放到Routers里面
+                Routers.push(c)
+            })
+            return
+        }
 
         // 在上一层中 未找到的 当前深度路由数据
         let noFind = []
@@ -104,7 +114,15 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
                     .replace(fobj.fileName, '')
                     .substr(1)
                     .replace('_', ':')
-                // if (path.match(':')) path += '?'
+                if (path.match('/') && !path.match('/:')) {
+                    path = path.replace('/index', '')
+                }
+                if (path === undefined) {
+                    throw new Error(
+                        `找到了对应的父路由，但是生成子路由的path为【undefined】了`
+                    )
+                }
+
                 // 将真正的路由path赋值给当前路由
                 c.path = path
 
