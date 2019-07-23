@@ -17,13 +17,18 @@
 ```ruby
 import Vue from 'vue'
 import Router from 'vue-router'
+// 引入依赖
 import autoRouter from 'vue-router-auto'
+
 Vue.use(Router)
 
 let routes = autoRouter({
-    rc: require.context('@/views', true, /\.vue$/), // 页面级的.vue存放位置，必传
-    redirect: '/test',  // '/'的重定向，可选
-    rootFile: 'views', // 页面级的.vue存放的文件夹，可选，默认为:views
+    // 页面级的.vue存放位置，必传
+    rc: require.context('@/views', true, /\.vue$/),
+    // '/'的重定向，可选，默认为''
+    redirect: '/test',
+    // 页面级的.vue存放的文件夹，可选，默认为:views
+    rootFile: 'views',
 })
 export default new Router({ routes })
 
@@ -35,12 +40,12 @@ export default new Router({ routes })
 
 ```ruby
 views/
---| user/
------| edit.vue
------| info.vue
------| index.vue
 --| login.vue
 --| home.vue
+--| user/
+-----| index.vue
+-----| edit.vue
+-----| info.vue
 ```
 
 ### 那么，vue-router-auto 自动生成的路由配置如下：
@@ -83,6 +88,8 @@ views/
 
 ```ruby
 views/
+--| login.vue
+--| home.vue
 --| home/
 -----| index.vue
 -----| about.vue
@@ -90,8 +97,7 @@ views/
 --| user/
 -----| index.vue
 -----| info.vue
---| login.vue
---| home.vue
+
 ```
 
 ### 那么，vue-router-auto 自动生成的路由配置如下：
@@ -143,13 +149,14 @@ views/
 
 ```ruby
 views/
---| home/
------| about.vue
------| _id.vue
---| user/
------| user-edit.vue
 --| login.vue
 --| home.vue
+--| home/
+-----| _id.vue
+-----| about.vue
+--| user/
+-----| user-edit.vue
+
 ```
 
 ### 那么，vue-router-auto 自动生成的路由配置如下：
@@ -167,20 +174,20 @@ views/
         component: () => import('@/views/home.vue'),
         children:[
             {
-                name:'home-about',
-                path:'about',
-                component: () => import('@/views/home/about.vue')
-            },
-            {
                 name:'home-id',
                 path:':id',
                 component: () => import('@/views/home/_id.vue')
+            },
+            {
+                name:'home-about',
+                path:'about',
+                component: () => import('@/views/home/about.vue')
             }
         ]
     },
     {
-        path:'/user-edit',
         name:'user-edit',
+        path:'/user/edit',
         component: () => import('@/views/user/user-edit.vue')
     }
 ]
