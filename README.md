@@ -36,8 +36,9 @@ export default new Router({ routes })
 ```ruby
 views/
 --| user/
------| user-edit.vue
------| user-info.vue
+-----| edit.vue
+-----| info.vue
+-----| index.vue
 --| login.vue
 --| home.vue
 ```
@@ -47,24 +48,29 @@ views/
 ```ruby
 [
     {
-        path:'/login',
         name:'login',
-        component:import('@/views/login.vue')
+        path:'/login',
+        component: () => import('@/views/login.vue')
     },
     {
-        path:'/home',
         name:'home',
-        component:import('@/views/home.vue')
+        path:'/home',
+        component: () => import('@/views/home.vue')
     },
     {
-        path:'/user-info',
+        name:'user',
+        path:'/user',
+        component: () => import('@/views/user/index.vue')
+    },
+    {
         name:'user-info',
-        component:import('@/views/user/user-info.vue')
+        path:'/user/info',
+        component: () => import('@/views/user/info.vue')
     },
     {
-        path:'/user-edit',
         name:'user-edit',
-        component:import('@/views/user/user-edit.vue')
+        path:'/user/edit',
+        component: () => import('@/views/user/edit.vue')
     }
 ]
 ```
@@ -78,11 +84,12 @@ views/
 ```ruby
 views/
 --| home/
+-----| index.vue
 -----| about.vue
 -----| product.vue
 --| user/
------| user-edit.vue
------| user-info.vue
+-----| index.vue
+-----| info.vue
 --| login.vue
 --| home.vue
 ```
@@ -92,36 +99,40 @@ views/
 ```ruby
 [
     {
-        path:'/login',
         name:'login',
-        component:import('@/views/login.vue')
+        path:'/login',
+        component: () => import('@/views/login.vue')
     },
     {
         path:'/home',
-        name:'home',
-        component:import('@/views/home.vue'),
+        component: () => import('@/views/home.vue'),
         children:[
             {
-                path:'product',
-                name:'home-product',
-                component:import('@/views/home/product.vue')
+                name:'home-index',
+                path:'',
+                component: () => import('@/views/home/index.vue')
             },
             {
-                path:'about',
                 name:'home-about',
-                component:import('@/views/home/about.vue')
+                path:'about',
+                component: () => import('@/views/home/about.vue')
+            },
+            {
+                name:'home-product',
+                path:'product',
+                component: () => import('@/views/home/product.vue')
             }
         ]
     },
     {
-        path:'/user-info',
-        name:'user-info',
-        component:import('@/views/user/user-info.vue')
+        name:'user',
+        path:'/user',
+        component: () => import('@/views/user/index.vue')
     },
     {
-        path:'/user-edit',
-        name:'user-edit',
-        component:import('@/views/user/user-edit.vue')
+        name:'user-info',
+        path:'/user/info',
+        component: () => import('@/views/user/info.vue')
     }
 ]
 ```
@@ -146,31 +157,31 @@ views/
 ```ruby
 [
     {
-        path:'/login',
         name:'login',
-        component:import('@/views/login.vue')
+        path:'/login',
+        component: () => import('@/views/login.vue')
     },
     {
-        path:'/home',
         name:'home',
-        component:import('@/views/home.vue'),
+        path:'/home',
+        component: () => import('@/views/home.vue'),
         children:[
             {
-                path:'about',
                 name:'home-about',
-                component:import('@/views/home/about.vue')
+                path:'about',
+                component: () => import('@/views/home/about.vue')
             },
             {
-                path:':id',
                 name:'home-id',
-                component:import('@/views/home/_id_.vue')
+                path:':id',
+                component: () => import('@/views/home/_id.vue')
             }
         ]
     },
     {
         path:'/user-edit',
         name:'user-edit',
-        component:import('@/views/user/user-edit.vue')
+        component: () => import('@/views/user/user-edit.vue')
     }
 ]
 ```
