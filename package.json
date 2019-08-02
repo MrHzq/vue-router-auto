@@ -1,6 +1,6 @@
 {
     "name": "vue-router-auto",
-    "version": "1.0.5",
+    "version": "2.0.0",
     "description": "自动生成Vue路由",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
