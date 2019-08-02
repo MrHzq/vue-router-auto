@@ -1,0 +1,4 @@
+lib/
+coverage/
+.history
+tsconfig.json

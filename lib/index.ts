@@ -2,25 +2,42 @@
  * @Author: hzq
  * @Date: 2018-12-12 10:10:19
  * @Last Modified by: hzq
- * @Last Modified time: 2019-07-23 09:01:32
+ * @Last Modified time: 2019-08-02 15:48:36
  * @文件说明: 所有路由处理 - 源码
  */
 
 // 所生成的所有路由数组
-const Routers = []
+const Routers: any = []
 
 /**
  * rc：require.context 传入的文件
  * redirect：需要将根路由(/)重定向到的路由
  * rootFile：页面级别的.vue存放的文件名称
  */
-export default ({ rc, redirect = '', rootFile = 'views' }) => {
+export default (config: any) => {
+    interface Config {
+        rc: any
+        redirect: string
+        rootFile: string
+    }
+    const defaultConfig: Config = {
+        rc: null,
+        redirect: '',
+        rootFile: 'views'
+    }
+    const { rc, redirect, rootFile } = (<any>Object).assign(
+        {},
+        defaultConfig,
+        config
+    )
+    if (rc === null) return Routers
+
     // allRouters[object]：存储所有路由的变量：先将所有的路由生成，然后放在该变量里面
-    const allRouters = {}
-    // 通过循环rc(传入的文件)
+    const allRouters: any = {}
+    // 通过循环RC(传入的文件)
     const routerFileAndLen = rc
         .keys()
-        .map(fileName => {
+        .map((fileName: any) => {
             // 因为得到的filename格式是: './baseButton.vue', 所以这里我们去掉头和尾，只保留真正的文件名
             const realFileName = fileName
                 .replace(/^\.\//, '')
@@ -35,12 +52,12 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
                 fileLen: fileName.match(/\//g).length
             }
         })
-        .sort((i, j) => i.fileLen - j.fileLen) // 通过文件深度 升序排序
+        .sort((i: any, j: any) => i.fileLen - j.fileLen) // 通过文件深度 升序排序
 
     // 传入文件中最大深度
     let maxLen = 0
 
-    routerFileAndLen.map(r => {
+    routerFileAndLen.map((r: any) => {
         const name = r.routerName
         // 生成一块路由对象，包含：name、fileName(用于后续处理真正path的依据)、path、needDelectName(用于后续处理，判断是否删除name的依据)、component
         const obj = {
@@ -63,7 +80,7 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
     Routers.push(...allRouters.len1)
 
     // 截取名称方法：从开始到最后一个'-'之间的字符串
-    const substrName = name => name.substr(0, name.lastIndexOf('-'))
+    const substrName = (name: any) => name.substr(0, name.lastIndexOf('-'))
 
     /**
      * 正式生成路由：1、将相应的路由放在对应的路由下，形成子路由；2、生成同级路由
@@ -71,7 +88,7 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
      * nofindnum：未找到路由的次数
      * newcurr：当前新的深度下的路由数据
      */
-    const ceateRouter = (index, nofindnum = 0, newcurr = null) => {
+    const ceateRouter = (index: any, nofindnum = 0, newcurr = null) => {
         // 当前深度下的路由数据：优先使用传入的newcurr，其次获取当前深度对应的路由数据
         const curr = newcurr || allRouters['len' + index]
         // 当前深度上一层的路由数据
@@ -79,7 +96,7 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
         // 若 没有上一层的数据了
         if (!pre) {
             // 则表明是属于顶层的路由
-            curr.map(c => {
+            curr.map((c: any) => {
                 let path = '/' + c.fileName.replace('/index', '')
                 if (path.match('_')) path = path.replace('/_', '/:')
                 // 将真正的路由path赋值给当前路由
@@ -91,12 +108,12 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
         }
 
         // 在上一层中 未找到的 当前深度路由数据
-        let noFind = []
+        let noFind: any = []
 
         // 循环当前深度路由数据
-        curr.map(c => {
+        curr.map((c: any) => {
             // 在 上一层深度 的路由数据里面查找
-            const fobj = pre.find(p => {
+            const fobj = pre.find((p: any) => {
                 // 生成 当前深度 当前项 路由的name
                 let name = substrName(c.name)
                 // 循环nofindnum，当nofindnum>0，则表示已经出现：在上一层中未找到对应的父路由，则需要将 当前深度 当前项 路由的name 再次生成
@@ -146,8 +163,8 @@ export default ({ rc, redirect = '', rootFile = 'views' }) => {
     for (let i = maxLen; i > 1; i--) ceateRouter(i)
 
     // 路由生成完毕了，应该删除 有默认子路由的父路由的name属性
-    const deleteNameFun = arr => {
-        arr.map(r => {
+    const deleteNameFun = (arr: any) => {
+        arr.map((r: any) => {
             // 删除多余的fileName属性
             delete r.fileName
             // 判断是否需要删除name属性

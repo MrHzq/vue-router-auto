@@ -1,29 +1,35 @@
 {
     "name": "vue-router-auto",
     "version": "1.0.5",
-    "description": "auto create vue-router",
-    "main": "index.js",
+    "description": "自动生成Vue路由",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "babel": "babel src --out-dir lib"
+        "build": "tsc",
+        "test": "mocha --reporter spec",
+        "cover": "istanbul cover node_modules/mocha/bin/_mocha test/*.js -- -R spec"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/MrHzq/babel-something.git"
+        "url": "git+https://github.com/MrHzq/vue-router-auto.git"
     },
     "keywords": [
         "vue-router",
         "auto-create-vue-router"
     ],
+    "readme": "使用手册https://github.com/MrHzq/vue-router-auto",
+    "readmeFilename": "README.md",
     "author": "hzq",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/MrHzq/babel-something/issues"
+        "url": "https://github.com/MrHzq/vue-router-auto/issues"
     },
-    "homepage": "https://github.com/MrHzq/babel-something#readme",
+    "homepage": "https://github.com/MrHzq/vue-router-auto#readme",
     "devDependencies": {
-        "babel-plugin-dynamic-import-webpack": "^1.1.0",
-        "babel-preset-env": "^1.7.0",
-        "babel-preset-stage-2": "^6.24.1"
+        "chai": "^4.2.0",
+        "coveralls": "^3.0.5",
+        "istanbul": "^0.4.5",
+        "mocha": "^6.2.0",
+        "typescript": "^3.5.3"
     }
 }

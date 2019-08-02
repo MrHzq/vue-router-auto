@@ -1,5 +1,7 @@
 # [vue-router-auto](https://github.com/MrHzq/vue-router-auto)
 
+[![Build Status](https://travis-ci.org/MrHzq/vue-router-auto.svg?branch=master)](https://travis-ci.org/MrHzq/vue-router-auto) [![Coverage Status](https://coveralls.io/repos/github/MrHzq/vue-router-auto/badge.svg?branch=master)](https://coveralls.io/github/MrHzq/vue-router-auto?branch=master)
+
 [GitHub 源码](https://github.com/MrHzq/vue-router-auto)
 
 [npm 包](https://www.npmjs.com/package/vue-router-auto)
