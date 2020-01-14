@@ -18,7 +18,7 @@
 
 然后在 src/router/index.js 里面统一处理
 
-```ruby
+```js
 import Vue from 'vue'
 import Router from 'vue-router'
 // 引入依赖
@@ -42,7 +42,7 @@ export default new Router({ routes })
 
 ### 假设 views 的目录结构如下：
 
-```ruby
+```js
 views/
 --| login.vue
 --| home.vue
@@ -54,7 +54,7 @@ views/
 
 ### 那么，vue-router-auto 自动生成的路由配置如下：
 
-```ruby
+```js
 [
     {
         name:'login',
@@ -90,7 +90,7 @@ views/
 
 ### 假设 views 的目录结构如下：
 
-```ruby
+```js
 views/
 --| login.vue
 --| home.vue
@@ -106,7 +106,7 @@ views/
 
 ### 那么，vue-router-auto 自动生成的路由配置如下：
 
-```ruby
+```js
 [
     {
         name:'login',
@@ -151,7 +151,7 @@ views/
 
 ### 假设 views 的目录结构如下：
 
-```ruby
+```js
 views/
 --| login.vue
 --| home.vue
@@ -165,7 +165,7 @@ views/
 
 ### 那么，vue-router-auto 自动生成的路由配置如下：
 
-```ruby
+```js
 [
     {
         name:'login',
